@@ -45,7 +45,122 @@ export async function startInteractiveClient(customClient?: Client): Promise<voi
             resources: {
               schemas: ["greeting", "sql"]
             }, 
-            tools: {} 
+            tools: {
+                'echo': {
+                    name: 'echo',
+                    description: 'Echo back the input message',
+                    parameters: {
+                        type: 'object',
+                        properties: {
+                            message: {
+                                type: 'string',
+                                description: 'The message to echo back'
+                            }
+                        },
+                        required: ['message']
+                    }
+                },
+                'bmi': {
+                    name: 'bmi',
+                    description: 'Calculate BMI based on height and weight',
+                    parameters: {
+                        type: 'object',
+                        properties: {
+                            height: {
+                                type: 'number',
+                                description: 'Height in meters'
+                            },
+                            weight: {
+                                type: 'number',
+                                description: 'Weight in kilograms'
+                            }
+                        },
+                        required: ['height', 'weight']
+                    }
+                },
+                'code-review': {
+                    name: 'code-review',
+                    description: 'Review code and provide feedback',
+                    parameters: {
+                        type: 'object',
+                        properties: {
+                            code: {
+                                type: 'string',
+                                description: 'The code to review'
+                            }
+                        },
+                        required: ['code']
+                    }
+                },
+                'sql-query': {
+                    name: 'sql-query',
+                    description: 'Execute a SQL query',
+                    parameters: {
+                        type: 'object',
+                        properties: {
+                            query: {
+                                type: 'string',
+                                description: 'The SQL query to execute'
+                            }
+                        },
+                        required: ['query']
+                    }
+                },
+                'create-table': {
+                    name: 'create-table',
+                    description: 'Create a new table from description',
+                    parameters: {
+                        type: 'object',
+                        properties: {
+                            tableName: {
+                                type: 'string',
+                                description: 'Name of the table to create'
+                            },
+                            columns: {
+                                type: 'array',
+                                items: {
+                                    type: 'object',
+                                    properties: {
+                                        name: {
+                                            type: 'string',
+                                            description: 'Column name'
+                                        },
+                                        type: {
+                                            type: 'string',
+                                            description: 'Column data type'
+                                        }
+                                    },
+                                    required: ['name', 'type']
+                                },
+                                description: 'List of columns in the table'
+                            }
+                        },
+                        required: ['tableName', 'columns']
+                    }
+                },
+                'list-tables': {
+                    name: 'list-tables',
+                    description: 'List all tables in the database',
+                    parameters: {
+                        type: 'object',
+                        properties: {}
+                    }
+                },
+                'natural-query': {
+                    name: 'natural-query',
+                    description: 'Convert natural language to SQL query',
+                    parameters: {
+                        type: 'object',
+                        properties: {
+                            query: {
+                                type: 'string',
+                                description: 'Natural language query'
+                            }
+                        },
+                        required: ['query']
+                    }
+                }
+            }
           } 
         }
       );
